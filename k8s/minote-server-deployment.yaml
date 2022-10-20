@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minote-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: minote-server
+  template:
+    metadata:
+      labels:
+        app: minote-server
+    spec:
+      containers:
+      - image: gcr.io/infs3208-358105/server:v1
+        name: container1
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: server-side-configs
+        - secretRef:
+            name: server-side-secrets

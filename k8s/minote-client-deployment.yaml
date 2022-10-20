@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minote-client-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: minote-client
+  template:
+    metadata:
+      labels:
+        app: minote-client
+    spec:
+      containers:
+      - image: gcr.io/infs3208-358105/client:v1
+        name: container1
+        imagePullPolicy: Always
